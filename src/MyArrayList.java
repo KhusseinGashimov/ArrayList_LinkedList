@@ -86,7 +86,13 @@ public class MyArrayList<T> implements MyList<T>{
 
     @Override
     public int indexOf(Object o) {
-        return 0;
+        int index1 = 0;
+        for (int i = 0; i < size; i++) {
+            if (arr[i] == o) {
+                index1 = i;
+            }
+        }
+        return index1;
     }
 
     @Override
