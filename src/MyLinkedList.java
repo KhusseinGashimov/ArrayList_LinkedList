@@ -5,7 +5,15 @@ public class MyLinkedList <E> implements MyList<E>, Iterable<E> {
         Node<E> next;
         Node<E> prev;
 
+        public Node(E element, Node<E> next, Node<E> prev) {
+            this.element = element;
+            this.next = next;
+            this.prev = prev;
+        }
     }
+    private Node<E> head;
+    private Node<E> tail;
+    private int size;
     @Override
     public int size() {
         return 0;
