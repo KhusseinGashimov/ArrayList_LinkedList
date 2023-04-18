@@ -60,9 +60,14 @@ public class MyArrayList<T> implements MyList<T>{
     public void clear() {
 
     }
-
+    public void checkIndex(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException();
+        }
+    }
     @Override
     public T get(int index) {
+        checkIndex(index);
         return arr[index];
     }
 
