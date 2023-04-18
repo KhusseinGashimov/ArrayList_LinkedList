@@ -47,8 +47,14 @@ public class MyArrayList<T> implements MyList<T>{
     }
 
     @Override
-    public boolean remove(Object item) {
-        return false;
+    public void remove(Object item) {
+        int newIndex = 0;
+        for (int i = 0; i < size; i++) {
+            if (!arr[i].equals(item)) {
+                arr[newIndex++] = arr[i];
+            }
+            size--;
+        }
     }
 
     @Override
