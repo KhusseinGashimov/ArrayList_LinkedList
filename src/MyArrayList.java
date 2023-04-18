@@ -40,7 +40,10 @@ public class MyArrayList<T> implements MyList<T>{
 
     @Override
     public void add(Object item, int index) {
-
+        if(size == arr.length){
+            increaseBuffer();
+        }
+        arr[index] = (T) item;
     }
 
     @Override
