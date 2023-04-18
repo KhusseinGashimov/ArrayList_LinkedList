@@ -6,14 +6,18 @@ public class MyArrayList<T> implements MyList{
         this.size = 0;
     }
 
+    public void increaseBuffer() {
+        T[] newArr = (T[]) new Object[arr.length * 2];
+        for (int i = 0; i < arr.length; i++) {
+            newArr[i] = arr[i];
+        }
+        arr = newArr;
+    }
+
     @Override
     public void add(Object item) {
         if (size == arr.length) {
-            T[] newArr = (T[]) new Object[arr.length * 2];
-            for (int i = 0; i < arr.length; i++) {
-                newArr[i] = arr[i];
-            }
-            arr = newArr;
+            increaseBuffer();
         }
     }
     @Override
