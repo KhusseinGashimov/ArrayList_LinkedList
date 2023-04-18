@@ -8,7 +8,7 @@ public interface MyList<T> {
     void add(T item);
     void add(T item, int index);
     boolean remove(T item);
-    T remove(int index);
+    void remove(int index);
     void clear();
     T get(int index);
     int indexOf(Object o);
