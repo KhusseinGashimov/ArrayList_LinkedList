@@ -6,5 +6,8 @@ public class Main{
         marr.add(8);
         System.out.println(marr.get(1));
         System.out.println(marr.contains(65));
+        marr.add(12,3);
+        System.out.println(marr.get(3));
+        System.out.println(marr.size());
     }
 }
