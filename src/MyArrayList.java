@@ -6,6 +6,10 @@ public class MyArrayList<T> implements MyList<T>, Comparator<MyArrayList<T>>{
     MyArrayList() {
         this.arr = (T[]) new Object[5];
         this.size = 0;
+    }
+    MyArrayList(Comparator<T> comparator) {
+        this.arr = (T[]) new Object[5];
+        this.size = 0;
         this.comparator = comparator;
     }
 
