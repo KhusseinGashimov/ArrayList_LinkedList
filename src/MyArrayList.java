@@ -62,7 +62,10 @@ public class MyArrayList<T> implements MyList<T>{
 
     @Override
     public void clear() {
-
+        for (int i = 0; i < size; i++) {
+            arr[i] = null;
+        }
+        size = 0;
     }
     public void checkIndex(int index) {
         if (index < 0 || index >= size) {
