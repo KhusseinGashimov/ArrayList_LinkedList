@@ -1,4 +1,4 @@
-public class MyArrayList implements MyList{
+public class MyArrayList<T> implements MyList{
     @Override
     public int size() {
         return 0;
