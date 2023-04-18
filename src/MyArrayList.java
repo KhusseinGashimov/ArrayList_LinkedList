@@ -97,7 +97,13 @@ public class MyArrayList<T> implements MyList<T>{
 
     @Override
     public int lastIndexOf(Object o) {
-        return 0;
+        int lastIndex = -1;
+        for (int i = 0; i < size; i++) {
+            if (arr[i].equals(o)) {
+                lastIndex = i;
+            }
+        }
+        return lastIndex;
     }
 
     @Override
