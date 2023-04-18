@@ -1,10 +1,12 @@
-import java.util.Iterator;
-public class MyArrayList<T> implements MyList<T>{
+import java.util.Comparator;
+public class MyArrayList<T> implements MyList<T>, Comparator<MyArrayList<T>>{
     private T[] arr;
     private int size;
+    private Comparator<T> comparator;
     MyArrayList() {
         this.arr = (T[]) new Object[5];
         this.size = 0;
+        this.comparator = comparator;
     }
 
     public void increaseBuffer() {
@@ -108,6 +110,20 @@ public class MyArrayList<T> implements MyList<T>{
 
     @Override
     public void sort() {
-
+        if (size > 1) {
+            for (int i = 0; i < size - 1; i++) {
+                for (int j = 0; j < size - i - 1; j++) {
+                    if (comparator.compare(arr[j], arr[j + 1]) > 0) {
+                        T temp = arr[j];
+                        arr[j] = arr[j + 1];
+                        arr[j + 1] = temp;
+                    }
+                }
+            }
+        }
+    }
+    @Override
+    public int compare(MyArrayList<T> o1, MyArrayList<T> o2) {
+        return o1.size - o2.size;
     }
 }

@@ -14,4 +14,6 @@ public interface MyList<T> {
     int indexOf(Object o);
     int lastIndexOf(Object o);
     void sort();
+
+    int compare(MyArrayList<T> o1, MyArrayList<T> o2);
 }
