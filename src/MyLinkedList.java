@@ -185,7 +185,13 @@ public class MyLinkedList <E extends Comparable<E>> implements MyList{
         return 0;
     }
 
-    public void printList(){ // Printing the Linked list in order
+    public void printList(){
+        Node currentNode = this.head; // the temporary node to access all the nodes
+        while(currentNode != null){ // looping through all the values
+            System.out.print(currentNode.data + " ");
+            currentNode = currentNode.next;
+        }
+        System.out.println();
     }
     public void printInReverse(){
         Node currentNode = this.tail;
