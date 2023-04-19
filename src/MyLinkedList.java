@@ -1,32 +1,37 @@
-import java.util.Iterator;
-public class MyLinkedList <E> implements MyList<E>, Iterable<E> {
-    private static class Node<E> {
-        E element;
-        Node<E> next;
-        Node<E> prev;
+public class MyLinkedList <E extends Comparable<E>> implements MyList{
 
-        public Node(E element, Node<E> next, Node<E> prev) {
-            this.element = element;
-            this.next = next;
-            this.prev = prev;
+    private int size = 0;
+
+    private class Node<E>{
+
+        private E data;
+        Node<E> next;
+        Node<E> previous;
+        public Node(E data){
+            this.data = data;
+        }
+        public Node(){
+
         }
     }
-    private Node<E> head;
-    private Node<E> tail;
-    private int size;
+    private Node head;
+    private Node tail;
+
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
-    @Override
+    @Override // finding the certain element in the linked list
     public boolean contains(Object o) {
+        Node currentNode = this.head;
+        while(currentNode != null){ // the logic of traversing the linked list
+            if(currentNode.data.equals((E)o)){
+                return true;
+            }
+            currentNode = currentNode.next;
+        }
         return false;
-    }
-
-    @Override
-    public void increaseBuffer() {
-
     }
 
     @Override
@@ -35,57 +40,153 @@ public class MyLinkedList <E> implements MyList<E>, Iterable<E> {
     }
 
     @Override
-    public void add(E item) {
-
+    public void add(Object item) { // adding the element in the end of the linked list
+        Node newNode = new Node<>((E)item);
+        if(this.head == null){
+            this.head = newNode;
+            this.tail = newNode;
+            size++;
+            return;
+        }
+        Node currentNode = this.head;
+        while(currentNode.next != null){
+            currentNode = currentNode.next;
+        }
+        currentNode.next = newNode;
+        newNode.previous = currentNode; // identifying the precious node
+        this.tail = newNode;
+        size++; // increasing the size
     }
 
     @Override
-    public void add(E item, int index) {
+    public void add(Object item, int index) { // a method to add the element by index
+        Node currentNode = this.head;
+        Node newNode = new Node<>((E) item);
+        int currentIndex = 0;
+        if(index == 0){
+            Node temp = this.head;
+            this.head = newNode;
+            this.head.next = temp;
+            return;
+        }else if(index >= size){
+            add((E)item);
+            return;
+        }
 
+        while(currentNode != null){
+            if(currentIndex == index){
+                currentNode.previous.next = newNode;
+                newNode.next = currentNode;
+                size++;
+                return;
+            }
+            currentIndex++;
+            currentNode = currentNode.next;
+        }
+
+        System.out.println("Error of adding the element");
     }
 
     @Override
-    public void remove(E item) {
+    public boolean remove(Object item) { // removing the first appearance of the object
+        Node currentNode = this.head;
+        Node previousNode = new Node();
+        if(currentNode != null && currentNode.data.equals((E)item)){
+            this.head = currentNode.next;
+            size--;
+            return true;
+        }
+        while(currentNode != null){//traversing through the List
+            if(currentNode.data.equals((E)item)){
+                System.out.println("Starting...");
+                break;
+            }
+            previousNode = currentNode;
+            currentNode = currentNode.next;
 
+        }
+        if (currentNode == null){
+            return false;
+        }
+
+        previousNode.next = currentNode.next;
+        size--;
+        return true;
     }
 
     @Override
-    public void remove(int index) {
+    public Object remove(int index) { // Removing the item by the index
+        int currentIndex = 0;
+        Node currentNode = this.head;
+        Node previousNode = this.head;
+        if(index == 0){
+            this.head = currentNode.next;
+            return currentNode;
+        }
+        while(currentNode != null){
+            if(index == currentIndex){
+                previousNode.next = currentNode.next;
+                size--;
+                return currentNode.data;
+            }
+            currentIndex++;
+            previousNode = currentNode;
+            currentNode = currentNode.next;
 
-    }
-
-    @Override
-    public void clear() {
-
-    }
-
-    @Override
-    public E get(int index) {
+        }
         return null;
     }
 
     @Override
-    public int indexOf(Object o) {
-        return 0;
+    public void clear() { // Deleting the linked list
+        this.head = new Node<>();
+        this.size = 0; // the size should be zero now since there no elements
+    }
+
+    @Override
+    public Object get(int index) {// getting the element by index
+        int currentIndex = 0;
+        Node currentNode = this.head;
+        while(currentNode != null){
+            if(index == currentIndex){
+                return currentNode.data;
+            }
+            currentIndex++;
+            currentNode = currentNode.next;
+        }
+        return null;
+    }
+
+    @Override
+    public int indexOf(Object o) {// returns the index of the first appearance of the object
+        int index = 0;
+        Node currentNode = this.head;
+        while(currentNode != null) {
+            if(currentNode.data.equals((E) o)){
+                return index;
+            }
+            index++;
+            currentNode = currentNode.next;
+        }
+        return -1;
     }
 
     @Override
     public int lastIndexOf(Object o) {
-        return 0;
+        return 1;
     }
 
     @Override
     public void sort() {
-
     }
 
     @Override
-    public int compare(MyArrayList<E> o1, MyArrayList<E> o2) {
+    public int compare(MyArrayList o1, MyArrayList o2) {
         return 0;
     }
 
-    @Override
-    public Iterator<E> iterator() {
-        return null;
+    public void printList(){ // Printing the Linked list in order
+    }
+    public void printInReverse(){
     }
 }

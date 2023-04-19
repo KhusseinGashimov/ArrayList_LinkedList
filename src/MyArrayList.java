@@ -53,7 +53,7 @@ public class MyArrayList<T> implements MyList<T>, Comparator<MyArrayList<T>>{
     }
 
     @Override
-    public void remove(Object item) {
+    public boolean remove(Object item) {
         int newIndex = 0;
         for (int i = 0; i < size; i++) {
             if (!arr[i].equals(item)) {
@@ -61,15 +61,17 @@ public class MyArrayList<T> implements MyList<T>, Comparator<MyArrayList<T>>{
             }
             size--;
         }
+        return false;
     }
 
     @Override
-    public void remove(int index) {
+    public Object remove(int index) {
         checkIndex(index);
         for (int i = index + 1; i < size; i++) {
             arr[i - 1] = arr[i];
         }
         size--;
+        return null;
     }
 
     @Override
