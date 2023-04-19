@@ -173,11 +173,41 @@ public class MyLinkedList <E extends Comparable<E>> implements MyList{
 
     @Override
     public int lastIndexOf(Object o) {
-        return 1;
+        int index = 0;
+        int desiredIndex = -1;
+        Node currentNode = this.head;
+        while(currentNode != null) {
+            if(currentNode.data.equals((E) o)){
+                desiredIndex = index;
+            }
+            index++;
+            currentNode = currentNode.next;
+        }
+        return desiredIndex;
     }
 
     @Override
     public void sort() {
+        int n = 0; // double-checking the size of the array
+        Node currentNode = this.head;
+        while(currentNode != null){
+            n++;
+            currentNode = currentNode.next;
+        }
+
+        for(int i = 0; i < n; i++){
+            currentNode = this.head;
+            while(currentNode.next != null){
+                E data1 = (E)currentNode.data;
+                E data2 = (E)currentNode.next.data;
+
+                if(data1.compareTo(data2) > 0){
+                    currentNode.next.data = data1;
+                    currentNode.data = data2;
+                }
+                currentNode = currentNode.next;
+            }
+        }
     }
 
     @Override
