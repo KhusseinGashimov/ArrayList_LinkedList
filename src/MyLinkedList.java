@@ -188,5 +188,10 @@ public class MyLinkedList <E extends Comparable<E>> implements MyList{
     public void printList(){ // Printing the Linked list in order
     }
     public void printInReverse(){
+        Node currentNode = this.tail;
+        while(currentNode != null){
+            System.out.println(currentNode.data + " ");
+            currentNode = currentNode.previous;
+        }
     }
 }
