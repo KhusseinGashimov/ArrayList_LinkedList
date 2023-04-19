@@ -210,11 +210,6 @@ public class MyLinkedList <E extends Comparable<E>> implements MyList{
         }
     }
 
-    @Override
-    public int compare(MyArrayList o1, MyArrayList o2) {
-        return 0;
-    }
-
     public void printList(){
         Node currentNode = this.head; // the temporary node to access all the nodes
         while(currentNode != null){ // looping through all the values
