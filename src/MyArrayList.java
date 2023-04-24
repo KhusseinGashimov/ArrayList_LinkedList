@@ -14,13 +14,31 @@ public class MyArrayList<T> implements MyList<T>, Comparator<MyArrayList<T>>{
     }
 
     public void increaseBuffer() {
-        T[] newArr = (T[]) new Object[arr.length * 2];
+        T[] newArr = (T[]) new Object[arr.length *2];
         for (int i = 0; i < arr.length; i++) {
             newArr[i] = arr[i];
         }
         arr = newArr;
     }
+    public void more(T[] addArr){
+        T[] newArr = (T[]) new Object[arr.length +addArr.length];
+        for (int i = 0; i < arr.length; i++) {
+            newArr[i] = arr[i];
+        }
+        arr = newArr;
+    }
+    public void addAll(T[] addArr){
+        if(addArr.length<=size-arr.length){
+            increaseBuffer();
+        }
+        else{
+            more(addArr);
+        }
+        for (int i = 0; i < addArr.length; i++) {
+            arr[size++]=addArr[i];
+        }
 
+    }
     @Override
     public void add(T element) {
         if (size == arr.length) {

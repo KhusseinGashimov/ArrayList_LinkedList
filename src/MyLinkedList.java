@@ -58,6 +58,12 @@ public class MyLinkedList <E extends Comparable<E>> implements MyList{
         size++; // increasing the size
     }
 
+    public void addAll(E[] addArr){
+        for (int i = 0; i < addArr.length; i++) {
+            add(addArr[i]);
+        }
+    }
+
     @Override
     public void add(Object item, int index) { // a method to add the element by index
         Node currentNode = this.head;
