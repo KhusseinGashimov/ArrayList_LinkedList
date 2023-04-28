@@ -1,4 +1,5 @@
 import java.util.LinkedList;
+import java.util.EmptyStackException;
 public class MyLinkedListStack<E> {
     private LinkedList<E> stack;
 
@@ -15,4 +16,5 @@ public class MyLinkedListStack<E> {
     public boolean isEmpty() {
         return stack.isEmpty();
     }
+
 }
