@@ -20,4 +20,8 @@ public class MyMinHeap<E extends Comparable<E>> {
         heap.set(index2, temp);
     }
 
+    public int size() {
+        return heap.size();
+    }
+
 }
