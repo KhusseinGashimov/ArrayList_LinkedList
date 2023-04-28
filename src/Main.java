@@ -70,5 +70,21 @@ public class Main{
         System.out.println(queue.size()); // Output: 2
         System.out.println(queue.isEmpty()); // Output: false
         //===========================================================
+
+
+
+        MyMinHeap<Integer> minHeap = new MyMinHeap<>();
+
+        // Add elements to the heaps
+        minHeap.insert(5);
+        minHeap.insert(12345);
+        minHeap.insert(2);
+        minHeap.insert(8);
+        // Print the contents of the heaps
+        System.out.println("Min Heap: " + minHeap);
+        // Remove elements from the heaps
+        minHeap.extract();
+        // Print the contents of the heaps again
+        System.out.println("Min Heap: " + minHeap);
     }
 }
