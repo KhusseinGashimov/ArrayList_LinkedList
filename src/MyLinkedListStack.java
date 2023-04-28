@@ -9,4 +9,7 @@ public class MyLinkedListStack<E> {
         stack.addFirst(element);
     }
 
+    public int size() {
+        return stack.size();
+    }
 }
