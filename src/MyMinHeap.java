@@ -14,5 +14,10 @@ public class MyMinHeap<E extends Comparable<E>> {
     private int getRightChildIndex(int index) {
         return 2 * index + 2;
     }
+    private void swap(int index1, int index2) {
+        E temp = heap.get(index1);
+        heap.set(index1, heap.get(index2));
+        heap.set(index2, temp);
+    }
 
 }
