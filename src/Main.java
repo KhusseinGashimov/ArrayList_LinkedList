@@ -41,5 +41,19 @@ public class Main{
         // Get the size of the stacks
         System.out.println(arrayStack.size()); // prints 2
         // ===========================================================
+
+
+        // MyArrayListQueue example
+        //==================================================================
+        // Create arrayListQueue like example
+        MyArrayListQueue<Integer> arrayListQueue = new MyArrayListQueue<>();
+        //enqueue elements into arrayListQueue
+        arrayListQueue.enqueue(10);
+        arrayListQueue.enqueue(20);
+        arrayListQueue.enqueue(30);
+        System.out.println(arrayListQueue.dequeue()); // Output: 10
+        System.out.println(arrayListQueue.peek()); // Output: 20
+        System.out.println(arrayListQueue.size()); // Output: 2
+        System.out.println(arrayListQueue.isEmpty()); // Output: false
     }
 }
