@@ -55,5 +55,20 @@ public class Main{
         System.out.println(arrayListQueue.peek()); // Output: 20
         System.out.println(arrayListQueue.size()); // Output: 2
         System.out.println(arrayListQueue.isEmpty()); // Output: false
+        //====================================================================
+
+
+        // MyLinkedListQueue example
+        //===========================================================
+        MyLinkedListQueue<String> queue = new MyLinkedListQueue<>();
+        //enqueue element into queue
+        queue.enqueue("apple");
+        queue.enqueue("banana");
+        queue.enqueue("cherry");
+        System.out.println(queue.dequeue()); // Output: apple
+        System.out.println(queue.peek()); // Output: banana
+        System.out.println(queue.size()); // Output: 2
+        System.out.println(queue.isEmpty()); // Output: false
+        //===========================================================
     }
 }
