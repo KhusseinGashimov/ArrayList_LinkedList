@@ -9,4 +9,7 @@ public class MyArrayListStack<E> {
     public void push(E element) {
         stack.add(element);
     }
+    public int size() {
+        return stack.size();
+    }
 }
