@@ -5,4 +5,7 @@ public class MyArrayListQueue<E> {
     public MyArrayListQueue(){
         queue = new ArrayList<>();
     }
+    public void enqueue(E element) {
+        queue.add(element);
+    }
 }
