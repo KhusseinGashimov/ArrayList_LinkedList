@@ -1,4 +1,5 @@
 import java.util.LinkedList;
+import java.util.NoSuchElementException;
 public class MyLinkedListQueue<E> {
     private LinkedList<E> queue;
 
@@ -14,4 +15,5 @@ public class MyLinkedListQueue<E> {
     public boolean isEmpty() {
         return queue.isEmpty();
     }
+
 }
