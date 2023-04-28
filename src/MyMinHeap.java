@@ -58,4 +58,17 @@ public class MyMinHeap<E extends Comparable<E>> {
             heapify(smallest);
         }
     }
+    public E extract() {
+        if (heap.isEmpty()) {
+            throw new NoSuchElementException();
+        }
+        E root = heap.get(0);
+        if (heap.size() == 1) {
+            heap.remove(0);
+        } else {
+            heap.set(0, heap.remove(heap.size() - 1));
+            heapify(0);
+        }
+        return root;
+    }
 }
