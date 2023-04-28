@@ -15,4 +15,10 @@ public class MyArrayListStack<E> {
     public boolean isEmpty() {
         return stack.isEmpty();
     }
+    public E pop() {
+        if (isEmpty()) {
+            throw new EmptyStackException();
+        }
+        return stack.remove(size() - 1);
+    }
 }
