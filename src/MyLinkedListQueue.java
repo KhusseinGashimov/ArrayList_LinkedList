@@ -5,4 +5,7 @@ public class MyLinkedListQueue<E> {
     public MyLinkedListQueue() {
         queue = new LinkedList<>();
     }
+    public void enqueue(E element) {
+        queue.addLast(element);
+    }
 }
