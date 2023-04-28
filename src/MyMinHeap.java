@@ -11,5 +11,8 @@ public class MyMinHeap<E extends Comparable<E>> {
     private int getLeftChildIndex(int index) {
         return 2 * index + 1;
     }
+    private int getRightChildIndex(int index) {
+        return 2 * index + 2;
+    }
 
 }
