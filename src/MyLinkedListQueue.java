@@ -8,4 +8,7 @@ public class MyLinkedListQueue<E> {
     public void enqueue(E element) {
         queue.addLast(element);
     }
+    public int size() {
+        return queue.size();
+    }
 }
