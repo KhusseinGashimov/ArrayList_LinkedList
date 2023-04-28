@@ -16,5 +16,11 @@ public class MyLinkedListStack<E> {
     public boolean isEmpty() {
         return stack.isEmpty();
     }
+    public E pop() {
+        if (isEmpty()) {
+            throw new EmptyStackException();
+        }
+        return stack.removeFirst();
+    }
 
 }
