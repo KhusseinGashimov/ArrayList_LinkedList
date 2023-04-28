@@ -27,4 +27,13 @@ public class MyMinHeap<E extends Comparable<E>> {
     public boolean isEmpty() {
         return heap.isEmpty();
     }
+
+    public void insert(E data) {
+        heap.add(data);
+        int currentIndex = heap.size() - 1;
+        while (currentIndex > 0 && heap.get(currentIndex).compareTo(heap.get(getParentIndex(currentIndex))) < 0) {
+            swap(currentIndex, getParentIndex(currentIndex));
+            currentIndex = getParentIndex(currentIndex);
+        }
+    }
 }
