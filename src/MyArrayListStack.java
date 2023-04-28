@@ -6,4 +6,7 @@ public class MyArrayListStack<E> {
     public MyArrayListStack() {
         stack = new ArrayList<>();
     }
+    public void push(E element) {
+        stack.add(element);
+    }
 }
