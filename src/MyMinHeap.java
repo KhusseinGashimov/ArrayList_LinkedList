@@ -23,5 +23,8 @@ public class MyMinHeap<E extends Comparable<E>> {
     public int size() {
         return heap.size();
     }
+    public boolean isEmpty() {
+        return heap.isEmpty();
+    }
 
 }
