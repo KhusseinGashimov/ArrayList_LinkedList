@@ -8,4 +8,7 @@ public class MyArrayListQueue<E> {
     public void enqueue(E element) {
         queue.add(element);
     }
+    public int size() {
+        return queue.size();
+    }
 }
