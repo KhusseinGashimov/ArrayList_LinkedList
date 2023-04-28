@@ -37,4 +37,10 @@ public class MyMinHeap<E extends Comparable<E>> {
             currentIndex = getParentIndex(currentIndex);
         }
     }
+    public E peek() {
+        if (heap.isEmpty()) {
+            throw new NoSuchElementException();
+        }
+        return heap.get(0);
+    }
 }
