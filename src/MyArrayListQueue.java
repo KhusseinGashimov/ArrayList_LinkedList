@@ -23,4 +23,11 @@ public class MyArrayListQueue<E> {
         queue.remove(0);
         return data;
     }
+    public E peek() {
+        if (isEmpty()) {
+            throw new NoSuchElementException();
+        }
+        return queue.get(0);
+    }
+
 }
