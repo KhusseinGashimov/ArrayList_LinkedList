@@ -43,4 +43,19 @@ public class MyMinHeap<E extends Comparable<E>> {
         }
         return heap.get(0);
     }
+    private void heapify(int index) {
+        int smallest = index;
+        int leftChild = getLeftChildIndex(index);
+        int rightChild = getRightChildIndex(index);
+        if (leftChild < heap.size() && heap.get(leftChild).compareTo(heap.get(smallest)) < 0) {
+            smallest = leftChild;
+        }
+        if (rightChild < heap.size() && heap.get(rightChild).compareTo(heap.get(smallest)) < 0) {
+            smallest = rightChild;
+        }
+        if (smallest != index) {
+            swap(index, smallest);
+            heapify(smallest);
+        }
+    }
 }
