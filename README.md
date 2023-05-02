@@ -1,6 +1,6 @@
 # ArrayList_LinkedList
 
-##MyArrayListQueue
+## MyArrayListQueue
 
 This is a simple implementation of a Queue using an ArrayList data structure.
 How to Use
