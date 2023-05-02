@@ -66,7 +66,7 @@ The dequeue and peek methods will throw a NoSuchElementException if the Queue is
 
 
 
-MyArrayListStack
+## MyArrayListStack
 
 This is a simple implementation of a Stack using an ArrayList data structure.
 How to Use
@@ -127,7 +127,7 @@ The pop and peek methods will throw an EmptyStackException if the Stack is empty
 
 
 
-My Linked List Queue
+## My Linked List Queue
 
 This is a Java implementation of a queue data structure using a linked list. It provides the following operations:
 
@@ -191,7 +191,7 @@ The isEmpty() operation checks if the queue is empty by using the isEmpty() meth
 
 
 
-MyLinkedListStack
+## MyLinkedListStack
 
 MyLinkedListStack is a Java implementation of a stack data structure using a linked list.
 Table of Contents
