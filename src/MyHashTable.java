@@ -204,5 +204,13 @@ public class MyHashTable<K, V> {
         // Return the length of the chainArray
         return chainArray.length;
     }
+
+    public boolean containsKey(K key) {
+        int ind = hash(key);
+        if( chainArray[ind]!=null){
+            return true;
+        }
+        return false;
+    }
 }
 

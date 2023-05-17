@@ -18,7 +18,9 @@ public class Main {
         for (int i = 0; i < table.getCapacity(); i++) {
             System.out.println("Bucket " + i + ": " + table.getBucketSize(i));
         }
+
+        MyHashTable<String, Integer> test = new MyHashTable<>();
+        test.put("Banaa",12);
+        System.out.println(test.containsKey("Bana"));
     }
-
-
 }
