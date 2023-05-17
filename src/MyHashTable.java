@@ -1,209 +1,147 @@
 public class MyHashTable<K, V> {
-
-    // Nested class for storing keys and values in linked list nodes
     private class HashNode<K, V> {
-        private K key; // Key
-        private V value; // Value
-        private HashNode<K, V> next; // Reference to the next node in the linked list
+        private K key;
+        private V value;
+        private HashNode<K, V> next;
 
         public HashNode(K key, V value) {
             this.key = key;
             this.value = value;
+            this.next = null;
         }
 
+        // Override the toString() method to display the key-value pair.
         @Override
         public String toString() {
-            return "{" + key + " " + value + "}";
+            return "{" + key.toString() + "=" + value.toString() + "}";
         }
     }
 
-    private HashNode<K, V>[] chainArray; // Array of linked lists (chains)
-    private int M = 11; // Initial size of the array
-    private int size; // Number of elements in the hash table
+    HashNode<K, V>[] chainArray;
+    private int M;
+    private int size;
 
+    // Default constructor.
     public MyHashTable() {
-        chainArray = new HashNode[M]; // standard constructor
-        size = 0;
+        this(11); // default number of chains
     }
 
+    // Constructor that allows the user to specify the number of chains.
     public MyHashTable(int M) {
         this.M = M;
-        chainArray = new HashNode[M];   // constructor for a certain size
+        chainArray = new HashNode[M];
         size = 0;
     }
 
-    // Hash function that maps a key to an index in the array
+    // Hash function to determine the index of the chain in which to insert a new key-value pair.
     private int hash(K key) {
-        String strKey = String.valueOf(key);
-        int sum = 0;
-        for (int i = 0; i < strKey.length(); i++) {
-            sum += strKey.charAt(i);
-        }
-
-        return sum % M;
+        int hash = key.hashCode() % M;
+        return (hash < 0) ? hash + M : hash; // handle negative hash values
     }
 
-    // Inserts a key-value pair into the hash table
+    // Insert a new key-value pair into the hash table.
     public void put(K key, V value) {
         int index = hash(key);
-        HashNode<K, V> node = new HashNode<K, V>(key, value);
+        HashNode<K, V> head = chainArray[index];
 
-        // If the chain at the computed index is empty, add the new node as the head of the chain
-        if (chainArray[index] == null) {
-            chainArray[index] = node;
-            size++;
-        }
-        // Otherwise, append the new node to the end of the chain
-        else {
-            HashNode<K, V> currentNode = chainArray[index];
-            while (currentNode.next != null) {
-                currentNode = currentNode.next;
+        // Check if the key already exists in the hash table.
+        while (head != null) {
+            if (head.key.equals(key)) {
+                head.value = value;
+                return;
             }
-            currentNode.next = node;
-            size++;
+            head = head.next;
         }
 
-        // If the load factor exceeds 0.7, double the size of the array and rehash all the elements
-        if (M / size < 0.7) {
-            M *= 2;
-            HashNode<K, V>[] newChainArray = new HashNode[M];
-            for (int j = 0; j < chainArray.length; j++) {
-                newChainArray[j] = chainArray[j];
-            }
-            chainArray = newChainArray;
-        }
+        // Create a new node and insert it at the head of the chain.
+        HashNode<K, V> newNode = new HashNode<>(key, value);
+        newNode.next = chainArray[index];
+        chainArray[index] = newNode;
+        size++;
     }
 
-    // Retrieves the value associated with the specified key
+    // Retrieve the value associated with a given key.
     public V get(K key) {
         int index = hash(key);
-        if (chainArray[index] == null) {
-            return null;
-        } else {
-            HashNode<K, V> currentNode = chainArray[index];
-            if (currentNode.key.equals(key)) {
-                return currentNode.value;
+        HashNode<K, V> head = chainArray[index];
+
+        while (head != null) {
+            if (head.key.equals(key)) {
+                return head.value;
             }
-            while (currentNode != null) {
-                if (currentNode.key.equals(key)) {
-                    return currentNode.value;
-                }
-                currentNode = currentNode.next;
-            }
+            head = head.next;
         }
-        return null;
+
+        return null; // key not found
     }
 
-    /**
-     * Removes the node with the given key and returns the associated value.
-     *
-     * @param key - the key to remove
-     * @return the value associated with the removed key, or null if the key was not found
-     */
+    // Remove the key-value pair associated with a given key.
     public V remove(K key) {
         int index = hash(key);
-        // If the bucket at the hashed index is empty, the key is not in the map
-        if (chainArray[index] == null) {
-            return null;
-        } else {
-            // If the first node in the bucket matches the given key, remove it and return its value
-            HashNode<K, V> currentNode = chainArray[index];
-            if (currentNode.key.equals(key)) {
-                chainArray[index] = currentNode.next;
-                size--;
-                return currentNode.value;
-            } else {
-                // Otherwise, search the linked list for the key
-                HashNode<K, V> previousNode = currentNode;
-                currentNode = currentNode.next;
-                while (currentNode != null) {
-                    if (currentNode.key.equals(key)) {
-                        previousNode.next = currentNode.next;
-                        size--;
-                        return currentNode.value;
-                    }
-                    previousNode = currentNode;
-                    currentNode = currentNode.next;
+        HashNode<K, V> head = chainArray[index];
+        HashNode<K, V> prev = null;
+
+        while (head != null) {
+            if (head.key.equals(key)) {
+                if (prev == null) {
+                    chainArray[index] = head.next;
+                } else {
+                    prev.next = head.next;
                 }
-                // Key was not found in the linked list
-                return null;
+                size--;
+                return head.value;
             }
+            prev = head;
+            head = head.next;
         }
+
+        return null; // key not found
     }
 
-    /**
-     * Checks whether the map contains a node with the given value.
-     *
-     * @param value - the value to search for
-     * @return true if a node with the given value is found, false otherwise
-     */
+    // Check if the hash table contains a given value.
     public boolean contains(V value) {
-        for (int i = 0; i < chainArray.length; i++) {
-            if (chainArray[i] == null) {
-                continue;
-            }
-            HashNode<K, V> currentNode = chainArray[i];
-            if (currentNode.value.equals(value)) {
-                return true;
-            } else {
-                while (currentNode.next != null) {
-                    if (currentNode.value.equals(value)) {
-                        return true;
-                    }
-                    currentNode = currentNode.next;
+        for (HashNode<K, V> head : chainArray) {
+            while (head != null) {
+                if (head.value.equals(value)) {
+                    return true;
                 }
+                head = head.next;
             }
         }
-        // Value was not found in any of the buckets
         return false;
     }
 
-    /**
-     * Returns the key associated with the given value.
-     *
-     * @param value - the value to search for
-     * @return the key associated with the given value, or null if the value was not found
-     */
+    // Retrieve the key associated with a given value.
     public K getKey(V value) {
-        for (int i = 0; i < chainArray.length; i++) {
-            if (chainArray[i] == null) {
-                continue;
-            }
-            if (chainArray[i].value.equals(value)) {
-                return chainArray[i].key;
-            }
-            HashNode<K, V> currentNode = chainArray[i];
-            while (currentNode != null) {
-                if (currentNode.value.equals(value)) {
-                    return currentNode.key;
+        for (HashNode<K, V> head : chainArray) {
+            while (head != null) {
+                if (head.value.equals(value)) {
+                    return head.key;
                 }
-                currentNode = currentNode.next;
+                head = head.next;
             }
         }
-        // Value was not found in any of the nodes
-        return null;
+        return null; // value not found
     }
 
-    public int getBucketSize(int index) {
-        // Check that the index is valid
-        if (index < 0 || index >= chainArray.length) {
-            throw new IllegalArgumentException("Invalid index");
+    // Override the toString() method to display the hash table.
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("{");
+        for (HashNode<K, V> head : chainArray) {
+            while (head != null) {
+                sb.append(head.toString() + ", ");
+                head = head.next;
+            }
         }
-
-        // Traverse the chain at the specified index and count the number of nodes
-        int size = 0;
-        HashNode<K, V> currentNode = chainArray[index];
-        while (currentNode != null) {
-            size++;
-            currentNode = currentNode.next;
+        if (sb.length() > 1) {
+            sb.setLength(sb.length() - 2); // remove the last comma and space
         }
-        return size;
+        sb.append("}");
+        return sb.toString();
     }
 
-    public int getCapacity() {
-        // Return the length of the chainArray
-        return chainArray.length;
-    }
 
     public boolean containsKey(K key) {
         int ind = hash(key);
